@@ -176,13 +176,24 @@ public class EmergencyRestoreManager
             SecurityLogger.Log("Restoring Power Plan", SecurityStatus.Failed, ex.Message);
         }
 
-        // Re-enable critical services
+        // Re-enable critical services (Privacy + Services module)
         var servicesToRestore = new[]
         {
+            // Privacy services
             ("DiagTrack", "auto"),
             ("dmwappushservice", "auto"),
             ("WSearch", "delayed-auto"),
-            ("lfsvc", "manual")
+            ("lfsvc", "manual"),
+            // Services module
+            ("Spooler", "auto"),
+            ("bthserv", "manual"),
+            ("BTAGService", "manual"),
+            ("RemoteRegistry", "manual"),
+            ("SysMain", "auto"),
+            ("wisvc", "manual"),
+            ("TabletInputService", "manual"),
+            ("Fax", "manual"),
+            ("WerSvc", "manual")
         };
 
         foreach (var (service, startType) in servicesToRestore)
