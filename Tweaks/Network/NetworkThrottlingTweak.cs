@@ -20,8 +20,8 @@ public class NetworkThrottlingTweak : TweakBase
     public override bool IsApplied()
     {
         var value = RegistryHelper.GetValue(RegistryHive.LocalMachine, SystemProfilePath, "NetworkThrottlingIndex", 10);
-        // 0xFFFFFFFF = disabled
-        return Convert.ToUInt32(value) == 0xFFFFFFFF;
+        // Check if it's set to -1 (0xFFFFFFFF as signed int)
+        return Convert.ToInt32(value) == -1;
     }
 
     public override TweakResult Apply()
@@ -30,19 +30,19 @@ public class NetworkThrottlingTweak : TweakBase
 
         try
         {
-            // Set NetworkThrottlingIndex to 0xFFFFFFFF (disabled)
+            // Use -1 which is equivalent to 0xFFFFFFFF in DWORD
             bool success = RegistryHelper.SetValue(
                 RegistryHive.LocalMachine, 
                 SystemProfilePath, 
                 "NetworkThrottlingIndex", 
-                unchecked((int)0xFFFFFFFF),
+                -1,
                 RegistryValueKind.DWord);
 
             // Verify
             var verify = RegistryHelper.GetValue(RegistryHive.LocalMachine, SystemProfilePath, "NetworkThrottlingIndex", 0);
-            bool verified = Convert.ToUInt32(verify) == 0xFFFFFFFF;
+            bool verified = Convert.ToInt32(verify) == -1;
 
-            NetworkLogger.Log("Setting NetworkThrottlingIndex -> 0xFFFFFFFF", 
+            NetworkLogger.Log("Setting NetworkThrottlingIndex -> 0xFFFFFFFF (disabled)", 
                 verified ? NetStatus.Success : NetStatus.Failed);
 
             // Also optimize SystemResponsiveness
