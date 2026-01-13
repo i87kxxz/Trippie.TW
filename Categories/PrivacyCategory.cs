@@ -1,4 +1,5 @@
 using Trippie.TW.Core.Base;
+using Trippie.TW.Tweaks.Privacy;
 
 namespace Trippie.TW.Categories;
 
@@ -14,6 +15,15 @@ public class PrivacyCategory : TweakCategoryBase
 
     public PrivacyCategory()
     {
-        // Tweaks will be registered here
+        RegisterTweaks(
+            new DisableTelemetryTweak(),
+            new DisableFeedbackTweak(),
+            new DisableAdvertisingIdTweak(),
+            new DisableActivityHistoryTweak(),
+            new DisableLocationTrackingTweak(),
+            new DisableSpeechRecognitionTweak(),
+            new DisableAppDiagnosticsTweak(),
+            new DisableWiFiSenseTweak()
+        );
     }
 }
