@@ -22,7 +22,11 @@ public class NetworkCategory : TweakCategoryBase
             new OptimizeTcpWindowTweak(),
             new DisableNetBiosTweak(),
             new SetDnsTweak(),
-            new DisableLsoTweak()
+            new DisableLsoTweak(),
+            // New gaming network optimizations
+            new UdpOptimizationTweak(),
+            new NetworkAdapterOptimizationTweak(),
+            new QoSOptimizationTweak()
         );
     }
 }

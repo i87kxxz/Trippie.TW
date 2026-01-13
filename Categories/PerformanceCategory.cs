@@ -24,7 +24,15 @@ public class PerformanceCategory : TweakCategoryBase
             new SystemResponsivenessTweak(),
             new DisableHibernationTweak(),
             new OptimizeNTFSTweak(),
-            new DisableSSDIndexingTweak()
+            new DisableSSDIndexingTweak(),
+            // New gaming optimizations
+            new GpuPriorityTweak(),
+            new MemoryOptimizationTweak(),
+            new TimerResolutionTweak(),
+            new DisableCoreParkingTweak(),
+            new MouseOptimizationTweak(),
+            new FullscreenOptimizationTweak(),
+            new MsiModeTweak()
         );
     }
 }
