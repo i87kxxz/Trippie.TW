@@ -46,7 +46,6 @@ public class DisableNagleTweak : TweakBase
         }
 
         bool anySuccess = false;
-        bool anyFailed = false;
 
         foreach (var guid in guids)
         {
@@ -71,13 +70,11 @@ public class DisableNagleTweak : TweakBase
                 else
                 {
                     NetworkLogger.Log($"Interface {guid.Substring(0, 8)}...", NetStatus.Failed);
-                    anyFailed = true;
                 }
             }
             catch (Exception ex)
             {
                 NetworkLogger.Log($"Interface {guid.Substring(0, 8)}...", NetStatus.Failed, ex.Message);
-                anyFailed = true;
             }
         }
 

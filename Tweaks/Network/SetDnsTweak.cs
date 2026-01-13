@@ -15,7 +15,6 @@ public class SetDnsTweak : TweakBase
     public override TweakRiskLevel RiskLevel => TweakRiskLevel.Moderate;
 
     private string? _adapterName;
-    private DnsProvider _selectedProvider = DnsProvider.Cloudflare;
 
     public override bool IsApplied()
     {
@@ -63,19 +62,16 @@ public class SetDnsTweak : TweakBase
                 primary = "1.1.1.1";
                 secondary = "1.0.0.1";
                 providerName = "Cloudflare";
-                _selectedProvider = DnsProvider.Cloudflare;
                 break;
             case '2':
                 primary = "8.8.8.8";
                 secondary = "8.8.4.4";
                 providerName = "Google";
-                _selectedProvider = DnsProvider.Google;
                 break;
             case '3':
                 primary = "9.9.9.9";
                 secondary = "149.112.112.112";
                 providerName = "Quad9";
-                _selectedProvider = DnsProvider.Quad9;
                 break;
             default:
                 NetworkLogger.Log("Setting DNS", NetStatus.Skipped, "Invalid choice");
@@ -154,12 +150,5 @@ public class SetDnsTweak : TweakBase
         {
             return Failure($"Error: {ex.Message}");
         }
-    }
-
-    private enum DnsProvider
-    {
-        Cloudflare,
-        Google,
-        Quad9
     }
 }
